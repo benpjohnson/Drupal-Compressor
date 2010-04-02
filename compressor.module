@@ -65,7 +65,8 @@ function compressor_preprocess_page(&$variables) {
           }
         }
       }
-      $css = str_replace('.css', '.min.css', $css);
+      $pat = '/(' . preg_quote('/' . file_directory_path() . '/css/', '/') . '.*)\.css/';
+      $css = preg_replace($pat, '\1.min.css', $css);
       // Replace the aggregated file with the minified JavaScript file.
       $variables['styles'] = $css;
     }
